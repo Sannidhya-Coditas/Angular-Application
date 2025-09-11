@@ -1,0 +1,38 @@
+<!-- Show login button only if NOT on /login -->
+<app-login *ngIf="ToshowLoginComp() === false"></app-login>
+<!-- <nav *ngIf="isAlredyLoggedIn()">
+  <a routerLink="/cart">Cart</a> | <a routerLink="/product">Product</a> |
+  <a routerLink="/feat1">Feature1</a> |
+  <a routerLink="/feat2">Feature2</a>
+</nav> -->
+<nav *ngIf="isLoggedIn" style="padding: 10px; display: block">
+  <a routerLink="/cart" style="padding: 5px">Cart</a> |
+  <a routerLink="/product" style="padding: 5px">Product</a> |
+  <a routerLink="/feat1" style="padding: 5px">Feature1</a> |
+  <a routerLink="/feat2" style="padding: 5px">Feature2</a> |
+  <a routerLink="/jobapplication" style="padding: 5px">job application form</a>
+</nav>
+<!-- parent.component.html -->
+<!-- <label *ngIf="isAlredyLoggedIn()">
+  <input type="checkbox" [(ngModel)]="useFrontendPagination" />
+  Use FrontEnd Pagination
+</label> -->
+<label
+  *ngIf="showPaginationControls"
+  style="padding: 10px; display: inline-block"
+>
+  <input type="checkbox" [(ngModel)]="useFrontendPagination" />
+  Use FrontEnd Pagination
+</label>
+<app-data-comp
+  [isFrontEndPaginated]="useFrontendPagination"
+  *ngIf="showPaginationControls"
+></app-data-comp>
+<app-data-table></app-data-table>
+
+<!-- <button *ngIf="!isLoginPageorHomePage()" routerLink="/login">Login</button> -->
+
+<!-- Page content -->
+
+<router-outlet></router-outlet>
+<button *ngIf="isLoggedIn" (click)="Logout()">Logout</button>

@@ -1,0 +1,121 @@
+/* Form container */
+form {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  font-family: Arial, sans-serif;
+}
+
+/* Form elements spacing */
+form > * {
+  display: block;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Input, select, textarea styles */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="date"],
+select,
+textarea,
+input[type="file"] {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+/* Radio and checkbox container */
+label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 14px;
+}
+
+label input[type="radio"],
+label input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Error messages */
+p {
+  color: red;
+  font-size: 12px;
+  margin: 2px 0 10px 0;
+}
+
+/* Work experience group */
+div[formArrayName] > div {
+  border: 1px solid #eee;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Buttons */
+button {
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button[type="button"] {
+  background-color: #28a745; /* green for add/remove */
+  margin-top: 5px;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Align file input nicely */
+input[type="file"] {
+  padding: 3px;
+}
+.form-group {
+  margin-bottom: 15px;
+}
+
+.radio-group {
+  display: flex;
+  gap: 20px; /* spacing between radio buttons */
+  margin-top: 5px;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.radio-group input[type="radio"] {
+  margin-right: 5px;
+}
+.bordered-container {
+  border: 1px solid #ccc; /* border color */
+  padding: 10px; /* space inside the border */
+  border-radius: 5px; /* rounded corners */
+  display: flex;
+  flex-direction: column; /* stack items vertically */
+  gap: 5px; /* space between elements */
+  width: 300px; /* optional width */
+}
+.wide-input {
+  width: 100%; /* make input span the full container width */
+  padding: 8px; /* inner padding for better look */
+  box-sizing: border-box; /* ensures padding doesn't exceed container width */
+  font-size: 14px; /* optional: bigger text */
+}

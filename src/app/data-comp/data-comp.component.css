@@ -1,0 +1,40 @@
+/* Table styling */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 10px;
+}
+
+table,
+th,
+td {
+  border: 1px solid #333;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: left;
+}
+
+/* Pagination buttons */
+.pagination-controls {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.pagination-controls button {
+  padding: 6px 12px;
+  margin: 0 5px;
+  border: 1px solid #333;
+  background-color: #f8f8f8;
+  cursor: pointer;
+}
+
+.pagination-controls button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+tbody tr {
+  cursor: pointer;
+}

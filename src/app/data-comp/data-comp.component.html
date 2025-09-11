@@ -1,0 +1,43 @@
+<!-- <p>data-comp works!</p> -->
+<table cellpadding="8" cellspacing="0" border="1">
+  <thead *ngIf="totalPages > 0">
+    <tr>
+      <th *ngFor="let col of columns">{{ col.displayname }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="paginatedData.length === 0">
+      <td [attr.colspan]="columns.length" style="text-align: center">
+        No users found
+      </td>
+    </tr>
+    <tr
+      *ngFor="let row of paginatedData"
+      (click)="onRowClick(row.id)"
+      style="cursor: pointer"
+    >
+      <td *ngFor="let col of columns">
+        {{ row[col.fieldname] }}
+      </td>
+    </tr>
+    <app-shelf
+      [userId]="selectedUserId"
+      [isOpen]="ShelfOpen"
+      (close)="closeShelf()"
+      (saved)="onUserUpdated($event)"
+      >></app-shelf
+    >
+  </tbody>
+</table>
+<div class="pagination-controls" *ngIf="totalPages > 0">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+    Prev
+  </button>
+  <span> Page {{ currentPage }} of {{ totalPages }} </span>
+  <button
+    (click)="changePage(currentPage + 1)"
+    [disabled]="currentPage === totalPages"
+  >
+    Next
+  </button>
+</div>

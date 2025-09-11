@@ -1,0 +1,18 @@
+<div class="dropdown-container">
+  <div class="dropdown-header" (click)="toggleDropdown()">
+    {{ selectedValues.length ? selectedValues.join(", ") : placeholder }}
+    <span class="arrow">{{ isOpen ? "▲" : "▼" }}</span>
+  </div>
+
+  <div class="dropdown-list" *ngIf="isOpen">
+    <label class="dropdown-item" *ngFor="let option of options">
+      <input
+        type="checkbox"
+        [checked]="isSelected(option)"
+        (change)="selectOption(option, $event)"
+        [disabled]="disabled"
+      />
+      {{ option }}
+    </label>
+  </div>
+</div>

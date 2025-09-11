@@ -1,0 +1,12 @@
+<p>login works!</p>
+<label>Email:</label>
+<input type="email" #emailInput (input)="email = emailInput.value" />
+
+<label>Password:</label>
+<input
+  type="password"
+  #passwordInput
+  (input)="password = passwordInput.value"
+/>
+
+<button (click)="showValues()">Submit</button>

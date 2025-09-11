@@ -1,0 +1,104 @@
+<form (ngSubmit)="onSubmit()">
+  <!-- Text Input -->
+  <input type="text" [formControl]="fullName" placeholder="Full Name" />
+  <!-- <p *ngIf="fullName.invalid && fullName.touched">Full Name is required!</p> -->
+  <p *ngIf="fullName.errors?.['required'] && fullName.touched">
+    fullName is required!
+  </p>
+  <p *ngIf="fullName.errors?.['noSpace'] && fullName.touched">
+    No spaces allowed!
+  </p>
+
+  <!-- Email -->
+  <input type="email" [formControl]="email" placeholder="Email" />
+  <p *ngIf="email.errors?.['required'] && email.touched">Email is required!</p>
+  <p *ngIf="email.errors?.['customEmail'] && email.touched">
+    Email must contain a dot and exactly 3 characters after it!
+  </p>
+
+  <!-- Password -->
+  <input type="password" [formControl]="password" placeholder="Password" />
+  <p *ngIf="password.invalid && password.touched">
+    Password is required and should be minimum of length 6 !
+  </p>
+
+  <!-- Number -->
+  <input type="number" [formControl]="age" placeholder="Age" />
+  <p *ngIf="age.invalid && age.touched">Age should be minimum 18</p>
+
+  <div class="form-group">
+    <label>Gender</label>
+    <div class="radio-group">
+      <label>
+        <input type="radio" [formControl]="gender" value="male" /> Male
+      </label>
+      <label>
+        <input type="radio" [formControl]="gender" value="female" /> Female
+      </label>
+      <label>
+        <input type="radio" [formControl]="gender" value="other" /> Other
+      </label>
+    </div>
+    <p *ngIf="gender.errors?.['required'] && gender.touched" class="error">
+      Gender is required!
+    </p>
+  </div>
+
+  <div class="bordered-container">
+    <label>Skills</label>
+    <app-multi-select
+      [options]="skillsList"
+      [formControl]="skills"
+    ></app-multi-select>
+  </div>
+  <div class="bordered-container">
+    <label>Preferred Work Modes</label>
+    <app-multi-select-checkbox-dropdown
+      [options]="workModesList"
+      [formControl]="workModesControl"
+      placeholder="Select work modes"
+    >
+    </app-multi-select-checkbox-dropdown>
+  </div>
+  <div *ngIf="workModesControl.touched && workModesControl.invalid">
+    Please select at least one work mode
+  </div>
+
+  <!-- <div class="form-group">
+  <label for="skills">Skills</label>
+  <select [formControl]="skills" multiple id="skills" size="5">
+    <option *ngFor="let skill of skillsList" [value]="skill">{{ skill }}</option>
+  </select>
+</div> -->
+
+  <!-- Select -->
+  <select [formControl]="qualification">
+    <option value="">Select Highest Qualification</option>
+    <option value="graduate">Graduate</option>
+    <option value="postgraduate">Postgraduate</option>
+    <option value="phd">PhD</option>
+  </select>
+  <div *ngIf="qualification.touched && qualification.invalid">
+    Qualification is required
+  </div>
+
+  <!-- Date -->
+  <!-- <input type="date" [formControl]="dob"> -->
+
+  <!-- Textarea -->
+  <!-- <textarea [formControl]="coverLetter" placeholder="Cover Letter"></textarea> -->
+
+  <!-- File -->
+  <!-- <input type="file" (change)="resume.setValue($event.target.files[0])"> -->
+
+  <!-- Work Experiences -->
+  <!-- <div *ngFor="let exp of experiences.controls; let i=index">
+    <input type="text" [formControl]="exp.get('company')" placeholder="Company">
+    <input type="number" [formControl]="exp.get('years')" placeholder="Years Worked">
+    <input type="text" [formControl]="exp.get('role')" placeholder="Role">
+    <button type="button" (click)="removeExperience(i)">Remove</button>
+  </div> -->
+  <!-- <button type="button" (click)="addExperience()">Add Experience</button> -->
+
+  <button type="submit">Submit</button>
+</form>
