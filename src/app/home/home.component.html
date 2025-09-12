@@ -1,6 +1,9 @@
 <p>Home page</p>
-<!-- <nav>
-  <a routerLink="/cart">Cart</a> | <a routerLink="/product">Product</a> |
-  <a routerLink="/feat1">Feature1</a> |
-  <a routerLink="/feat2">Feature2</a>
-</nav> -->
+<label *ngIf="true" style="padding: 10px; display: inline-block">
+  <input type="checkbox" [(ngModel)]="useFrontendPagination" />
+  Use FrontEnd Pagination
+</label>
+<app-data-comp
+  [isFrontEndPaginated]="useFrontendPagination"
+  *ngIf="true"
+></app-data-comp>

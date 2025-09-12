@@ -1,0 +1,12 @@
+<!-- header.component.html -->
+<nav *ngIf="isLoggedIn" class="nav-bar">
+  <a routerLink="/home" style="padding: 5px">Home</a> |
+  <a routerLink="/product" style="padding: 5px">Products</a> |
+  <a routerLink="/orders" style="padding: 5px">Orders</a> |
+  <a routerLink="/invoices" style="padding: 5px">Invoices</a> |
+  <a routerLink="/jobapplication" style="padding: 5px">Job Application Form</a>
+  <button (click)="onLogout()" style="margin-left: 10px">Logout</button>
+</nav>
+
+<!-- Show login component if NOT logged in -->
+<app-login *ngIf="isLoggedIn === false"></app-login>

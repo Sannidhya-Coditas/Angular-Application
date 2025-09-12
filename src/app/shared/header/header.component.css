@@ -1,0 +1,33 @@
+/* header.component.css */
+.nav-bar {
+  display: flex;
+  align-items: center;
+  padding: 12px 24px;
+  margin: 10px 0; /* spacing above and below header */
+  border-bottom: 1px solid #ddd; /* subtle separator */
+}
+
+.nav-bar a {
+  color: #333;
+  font-weight: 500;
+  text-decoration: none;
+  margin-right: 20px;
+  padding: 4px 0;
+}
+
+.nav-bar a:hover {
+  text-decoration: underline;
+}
+
+.nav-bar button {
+  margin-left: auto; /* push logout button to the far right */
+  padding: 6px 14px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+}
+
+.nav-bar button:hover {
+  background: #f5f5f5;
+}

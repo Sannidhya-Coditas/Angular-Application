@@ -1,0 +1,20 @@
+<input
+  *ngIf="type === 'string'"
+  type="text"
+  [(ngModel)]="value"
+  (ngModelChange)="valueChange.emit($event)"
+/>
+
+<input
+  *ngIf="type === 'number'"
+  type="number"
+  [(ngModel)]="value"
+  (ngModelChange)="valueChange.emit($event)"
+/>
+
+<input
+  *ngIf="type === 'date'"
+  type="date"
+  [(ngModel)]="value"
+  (ngModelChange)="valueChange.emit($event)"
+/>

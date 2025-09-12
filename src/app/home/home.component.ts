@@ -12,6 +12,7 @@ export class HomeComponent {
     private router: Router,
     private auth: AuthService,
   ) {}
+  useFrontendPagination = true;
   isloggedin() {
     if (this.auth.isLoggedIn()) {
       return true;

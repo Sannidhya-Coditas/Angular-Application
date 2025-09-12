@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from '../app/shared/login/login.component';
 import { AuthGuard } from './guards/AuthGuard';
 
 const routes: Routes = [
@@ -10,26 +10,24 @@ const routes: Routes = [
   {
     path: 'product',
     loadChildren: () =>
-      import('./product/product/product.module').then((m) => m.ProductModule),
+      import('./features/product/product.module').then((m) => m.ProductModule),
   },
   {
-    path: 'cart',
+    path: 'orders',
     loadChildren: () =>
-      import('./cart/cart/cart.module').then((m) => m.CartModule),
+      import('./features/order/order.module').then((m) => m.OrderModule),
   },
   {
-    path: 'feat1',
+    path: 'invoices',
     loadChildren: () =>
-      import('./Feat1/feat1/feat1.module').then((m) => m.Feat1Module),
-  },
-  {
-    path: 'feat2',
-    loadChildren: () =>
-      import('./Feat2/feat2/feat2.module').then((m) => m.Feat2Module),
+      import('./features/invoices/invoices.module').then(
+        (m) => m.InvoicesModule,
+      ),
   },
   {
     path: 'jobapplication',
-    loadChildren: () => import('./form/form.module').then((m) => m.FormModule),
+    loadChildren: () =>
+      import('./features/form/form.module').then((m) => m.FormModule),
   },
 ];
 

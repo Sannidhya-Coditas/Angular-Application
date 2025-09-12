@@ -1,1 +1,51 @@
-<p>data-table works!</p>
+<div class="table-actions">
+  <button *ngIf="!editMode" (click)="toggleEditMode()">Edit</button>
+  <ng-container *ngIf="editMode">
+    <button (click)="saveEdit()">Save</button>
+    <button (click)="cancelEdit()">Cancel</button>
+  </ng-container>
+</div>
+
+<table cellpadding="8" cellspacing="0" border="1">
+  <thead *ngIf="totalPages > 0">
+    <tr>
+      <th *ngFor="let col of columns">{{ col.displayName }}</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngIf="paginatedData.length === 0">
+      <td [attr.colspan]="columns.length" style="text-align: center">
+        No records found
+      </td>
+    </tr>
+    <tr
+      *ngFor="let row of paginatedData; let i = index"
+      (click)="onRowClick(row.id)"
+      style="cursor: pointer"
+    >
+      <td *ngFor="let col of columns">
+        <ng-container *ngIf="!editMode">
+          {{ row[col.fieldName] }}
+        </ng-container>
+        <ng-container *ngIf="editMode">
+          <app-cell-editor
+            [type]="col.type!"
+            [(value)]="row[col.fieldName]"
+          ></app-cell-editor>
+        </ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div class="pagination-controls" *ngIf="totalPages > 0">
+  <button (click)="changePage(currentPage - 1)" [disabled]="currentPage === 1">
+    Prev
+  </button>
+  <span> Page {{ currentPage }} of {{ totalPages }} </span>
+  <button
+    (click)="changePage(currentPage + 1)"
+    [disabled]="currentPage === totalPages"
+  >
+    Next
+  </button>
+</div>
