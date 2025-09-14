@@ -3,7 +3,9 @@ import { FormArray, FormControl, Validators } from '@angular/forms';
 import {
   customEmailValidator,
   noSpaceValidator,
+  usernameTakenValidator,
 } from '../form-validators/validator';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-job-application',
@@ -11,7 +13,10 @@ import {
   styleUrls: ['./job-application.component.css'],
 })
 export class JobApplicationComponent {
-  fullName = new FormControl('', [Validators.required, noSpaceValidator]);
+  constructor(private http:HttpClient){
+
+  }
+  fullName = new FormControl('', [Validators.required],usernameTakenValidator(this.http));
   email = new FormControl('', [
     Validators.required,
     noSpaceValidator,

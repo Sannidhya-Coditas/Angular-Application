@@ -8,6 +8,9 @@
   <p *ngIf="fullName.errors?.['noSpace'] && fullName.touched">
     No spaces allowed!
   </p>
+  <div *ngIf="fullName.hasError('usernameTaken')">
+    Username is already taken
+  </div>
 
   <!-- Email -->
   <input type="email" [formControl]="email" placeholder="Email" />

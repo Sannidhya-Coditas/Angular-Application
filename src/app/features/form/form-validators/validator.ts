@@ -1,4 +1,7 @@
-import { AbstractControl, ValidationErrors } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { AbstractControl, AsyncValidatorFn, ValidationErrors } from '@angular/forms';
+import { catchError, map, of } from 'rxjs';
+import { ApiEndpoints } from 'src/app/constants/api-endpoints';
 
 export function noSpaceValidator(
   control: AbstractControl,
@@ -24,4 +27,19 @@ export function customEmailValidator(
   }
 
   return null; // valid
+}
+export function usernameTakenValidator(http: HttpClient): AsyncValidatorFn {
+  return (control: AbstractControl) => {
+    if (!control.value) {
+      return of(null); // no username → no error
+    }
+    return http
+      .get<{ taken: boolean }>(
+        ApiEndpoints.userExists(control.value)
+      )
+      .pipe(
+        map(response => (response.taken ? { usernameTaken: true } : null)),
+        catchError(() => of(null)) // fail-safe
+      );
+  };
 }
