@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/AuthService';
 
@@ -12,6 +12,7 @@ export class HeaderComponent {
     private auth: AuthService,
     private router: Router,
   ) {}
+  @Output() InformAppComp = new EventEmitter();
   get isLoggedIn(): boolean {
     return this.auth.isLoggedIn();
   }
@@ -27,11 +28,16 @@ export class HeaderComponent {
   isLoginPageorHomePage(): boolean {
     return this.router.url === '/login' || this.router.url === '/home';
   }
+  userloggedin(val: any) {
+    console.log('header', val);
+    this.InformAppComp.emit(val);
+  }
 
   onLogout() {
     if (this.isLoggedIn) {
       this.auth.logout();
-      //this.router.navigate(['/login']);
+      this.InformAppComp.emit(false);
+      this.router.navigate(['/login']);
     }
   }
 }

@@ -28,9 +28,14 @@
           {{ row[col.fieldName] }}
         </ng-container>
         <ng-container *ngIf="editMode">
-          <app-cell-editor
+          <!-- <app-cell-editor
             [type]="col.type!"
-            [(value)]="row[col.fieldName]"
+            [(value)]="editBuffer[row.id][col.fieldName]"
+          ></app-cell-editor> -->
+           <app-cell-editor
+            [type]="col.type!"
+            [value]="editBuffer[row.id][col.fieldName]"
+            (valueChange)="onvaluechange($event,row.id,col.fieldName)"
           ></app-cell-editor>
         </ng-container>
       </td>

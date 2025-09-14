@@ -9,4 +9,7 @@
 </nav>
 
 <!-- Show login component if NOT logged in -->
-<app-login *ngIf="isLoggedIn === false"></app-login>
+<app-login
+  (LoggedIn)="userloggedin($event)"
+  *ngIf="isLoggedIn === false"
+></app-login>

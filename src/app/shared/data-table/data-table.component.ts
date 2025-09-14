@@ -8,9 +8,21 @@ import { ColumnDefinitionV1 } from '../models/model';
 })
 export class DataTableComponent<T extends { id: number }> {
   editMode = false; // toggles table edit mode
+  editBuffer: { [id: number]: T} = {};
+
 
   toggleEditMode() {
     this.editMode = !this.editMode;
+     if (this.editMode) {
+    // Deep clone current page rows into buffer
+    this.editBuffer = {};
+    this.alldata.forEach(row => {
+      this.editBuffer[row.id] = { ...row }; // shallow clone is enough if no nested obj
+    });
+    console.log(this.editBuffer)
+  } else {
+    this.editBuffer = {};
+  }
   }
 
   @Input() isFrontEndPaginated: boolean = true;
@@ -34,6 +46,7 @@ export class DataTableComponent<T extends { id: number }> {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['alldata']) {
+      console.log('alldata changed')
       this.totalPages = this.calculateTotalPages(this.alldata.length);
       this.currentPage = 1;
       this.updateFrontendPage();
@@ -58,7 +71,9 @@ export class DataTableComponent<T extends { id: number }> {
 
   changePage(page: number) {
     this.currentPage = page;
+    console.log(this.currentPage)
     this.updateFrontendPage();
+    console.log(this.editBuffer)
   }
 
   onRowClick(id: number) {
@@ -72,9 +87,28 @@ export class DataTableComponent<T extends { id: number }> {
   }
   cancelEdit() {
     this.editMode = false;
+  //   console.log(this.paginatedData)
+  //   //this.paginatedData.forEach(row=>)
+  //  let data= this.paginatedData.map((row)=>({row:row.id}))
+  //  console.log(data)
+  //  console.log(this.paginatedData)
+   this.editBuffer = {};
   }
 
   saveEdit() {
-    this.editMode = false;
+    this.alldata = this.alldata.map(item =>
+    this.editBuffer[item.id] ? { ...this.editBuffer[item.id] } : item
+  );
+  this.updateFrontendPage();
+  this.editMode = false;
+  this.editBuffer = {};
+  }
+  onvaluechange<K extends keyof T>(event:any,rowid:any,fieldname:K){
+    console.log(rowid)
+    console.log(fieldname)
+    console.log(event)
+    console.log(this.editBuffer[rowid][fieldname])
+    this.editBuffer[rowid][fieldname]=event
+    console.log(this.editBuffer[rowid][fieldname])
   }
 }

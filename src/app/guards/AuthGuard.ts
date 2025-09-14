@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
@@ -12,7 +13,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+  ) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
@@ -22,7 +26,12 @@ export class AuthGuard implements CanActivate {
     | boolean
     | UrlTree {
     if (state.url === '/login') {
-      return this.authService.isLoggedIn() === false;
+      //return this.authService.isLoggedIn() === false;
+      if (this.authService.isLoggedIn()) {
+        return this.router.parseUrl('/home');
+      } else {
+        return true;
+      }
     } else if (state.url === '/home') {
       return this.authService.isLoggedIn() === true;
     }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { users } from '../../constants/usermap';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/AuthService';
@@ -11,6 +11,7 @@ import { AuthService } from '../../services/AuthService';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  @Output() LoggedIn = new EventEmitter();
   constructor(
     private router: Router,
     private auth: AuthService,
@@ -22,6 +23,7 @@ export class LoginComponent {
     if (users.has(this.email)) {
       if (users.get(this.email) === this.password) {
         this.auth.login();
+        this.LoggedIn.emit(true);
         this.router.navigate(['/home']);
       } else {
         alert('incorrect password');

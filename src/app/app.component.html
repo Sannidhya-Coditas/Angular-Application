@@ -1,2 +1,7 @@
-<app-header></app-header>
+<app-header (InformAppComp)="isLoggedIn($event)"></app-header>
+<div *ngIf="loggedinV1">
 <router-outlet></router-outlet>
+</div>
+
+
+

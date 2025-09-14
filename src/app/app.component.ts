@@ -10,6 +10,17 @@ import { AuthService } from './services/AuthService';
 export class AppComponent {
   title = 'loginapp';
 
-  constructor(private auth: AuthService) {}
-  isLoggedIn = this.auth.isLoggedIn() == true ? true : false;
+  constructor(private auth: AuthService) {
+    console.log("AppComponent created, loggedin =", this.loggedin);
+  }
+  get loggedinV1(): boolean {
+  return this.auth.isLoggedIn();
+}
+
+  loggedin: boolean = false;
+  isLoggedIn(val: any) {
+    console.log('app', val);
+    this.loggedin = val === true;
+    console.log(this.loggedin);
+  }
 }
